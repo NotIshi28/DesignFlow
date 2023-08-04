@@ -10,16 +10,24 @@ export const NavLinks = [
     "Frontend",
     "Backend",
     "Full-Stack",
-    "Mobile",
-    "UI/UX",
-    "Game Dev",
+    "App Development",
+    "Portfolio",
+    "Game Development",
     "DevOps",
     "Data Science",
     "Machine Learning",
     "Cybersecurity",
     "Blockchain",
     "E-commerce",
-    "Chatbots"
+    "Chatbots",
+    "UI/UX",
+    "2D Design",
+    "3D Design",
+    "Pitchdeck",
+    "Animation",
+    "Branding",
+    "Illustration",
+    "Product Design",
   ]
   
   export const footerLinks = [
