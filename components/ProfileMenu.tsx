@@ -6,15 +6,29 @@ import { signOut } from "next-auth/react";
 import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 
-import { SessionInterface } from "@/common.types";
+type UserProps = {
+    name?: string | null | undefined;
+    email?: string | null | undefined;
+    image?: string | null | undefined;
+};
 
-const ProfileMenu = ({ session }: { session: SessionInterface }) => {
+type Props = {
+    session: {
+        user?: UserProps;
+    };
+};
+
+
+const ProfileMenu = ({ session }: Props) => {
     const [openModal, setOpenModal] = useState(false);
 
     return (
         <div className="flexCenter z-10 flex-col relative">
             <Menu as="div">
-                <Menu.Button className="flexCenter" onMouseEnter={() => setOpenModal(true)} >
+                <Menu.Button
+                    className="flexCenter"
+                    onMouseEnter={() => setOpenModal(true)}
+                >
                     {session?.user?.image && (
                         <Image
                             src={session.user.image}
@@ -38,7 +52,7 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
                 >
                     <Menu.Items
                         static
-                        className="flexStart profile_menu-items"
+                        className="flexStart flex-col absolute right-1/2 translate-x-1/2 mt-3 p-7 sm:min-w-[300px] rounded-xl bg-white border border-nav-border shadow-menu"
                         onMouseLeave={() => setOpenModal(false)}
                     >
                         <div className="flex flex-col items-center gap-y-4">
@@ -56,21 +70,41 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
 
                         <div className="flex flex-col gap-3 pt-10 items-start w-full">
                             <Menu.Item>
-                                <Link href={`/profile/${session?.user?.id}`} className="text-sm">Work Preferences</Link>
+                                <Link
+                                    href="/profile"
+                                    className="text-sm"
+                                >
+                                    Work Preferences
+                                </Link>
                             </Menu.Item>
                             <Menu.Item>
-                                <Link href={`/profile/${session?.user?.id}`} className="text-sm">Settings</Link>
+                                <Link
+                                    href="/profile"
+                                    className="text-sm"
+                                >
+                                    Settings
+                                </Link>
                             </Menu.Item>
                             <Menu.Item>
-                                <Link href={`/profile/${session?.user?.id}`} className="text-sm">Profile</Link>
+                                <Link
+                                    href="/profile"
+                                    className="text-sm"
+                                >
+                                    Profile
+                                </Link>
                             </Menu.Item>
                         </div>
-                        <div className="w-full flexStart border-t border-nav-border mt-5 pt-5">
+                        <div className="w-full flexStart border-t-[1px] border-nav-border mt-5 pt-5">
                             <Menu.Item>
-                                <button type="button" className="text-sm" onClick={() => signOut()}> 
+                                <button
+                                    type="button"
+                                    className="text-sm"
+                                    onClick={() => signOut()}
+                                >
                                     Sign out
                                 </button>
                             </Menu.Item>
+
                         </div>
                     </Menu.Items>
                 </Transition>

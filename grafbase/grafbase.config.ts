@@ -7,6 +7,8 @@ const User = g.model('User', {
   avatarUrl: g.url(),
   description: g.string().length({ min: 2, max: 1000 }).optional(),
   githubUrl: g.url().optional(),
+  behanceUrl: g.url().optional(),
+  dribbbleUrl: g.url().optional(),
   linkedinUrl: g.url().optional(), 
   projects: g.relation(() => Project).list().optional(),
 }).auth((rules) => {
@@ -19,7 +21,9 @@ const Project = g.model('Project', {
   description: g.string(), 
   image: g.url(),
   liveSiteUrl: g.url(), 
-  githubUrl: g.url(), 
+  githubUrl: g.url().optional(), 
+  behanceUrl: g.url().optional(),
+  dribbbleUrl: g.url().optional(),
   category: g.string().search(),
   createdBy: g.relation(() => User),
 }).auth((rules) => {

@@ -5,16 +5,16 @@ import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation';
 
 import FormField from './FormField';
-import Button from './Button';
+import CustomButton from './Button';
 import CustomMenu from './CustomMenu';
 import { categoryFilters } from '@/constant';
-import { updateProject, createNewProject, fetchToken } from '@/lib/actions';
-import { FormState, ProjectInterface, SessionInterface } from '@/common.types';
+import { updateProject, createNewProject } from '@/lib/actions';
+import { FormState, ProjectNode } from '@/common.types';
 
 type Props = {
     type: string,
-    session: SessionInterface,
-    project?: ProjectInterface
+    session: any,
+    project?: ProjectNode
 }
 
 const ProjectForm = ({ type, session, project }: Props) => {
@@ -27,11 +27,16 @@ const ProjectForm = ({ type, session, project }: Props) => {
         image: project?.image || "",
         liveSiteUrl: project?.liveSiteUrl || "",
         githubUrl: project?.githubUrl || "",
+        behanceUrl: project?.behanceUrl || "",
+        dribbbleUrl: project?.dribbbleUrl || "",
         category: project?.category || ""
     })
 
     const handleStateChange = (fieldName: keyof FormState, value: string) => {
-        setForm((prevForm) => ({ ...prevForm, [fieldName]: value }));
+        setForm((prevForm) => ({
+            ...prevForm,
+            [fieldName]: value,
+        }));
     };
 
     const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,44 +47,38 @@ const ProjectForm = ({ type, session, project }: Props) => {
         if (!file) return;
 
         if (!file.type.includes('image')) {
-            alert('Please upload an image!');
-
+            alert('Please upload an image file!');
             return;
         }
 
         const reader = new FileReader();
-
         reader.readAsDataURL(file);
 
         reader.onload = () => {
             const result = reader.result as string;
-
             handleStateChange("image", result)
         };
     };
 
     const handleFormSubmit = async (e: FormEvent) => {
-        e.preventDefault();
-
+        e.preventDefault()
         setSubmitting(true)
-
-        const { token } = await fetchToken()
 
         try {
             if (type === "create") {
-                await createNewProject(form, session?.user?.id, token)
-
+                await createNewProject(form, session?.user?.id)
                 router.push("/")
             }
-            
-            if (type === "edit") {
-                await updateProject(form, project?.id as string, token)
 
+            if (type === "edit") {
+                // @ts-ignore
+                await updateProject(form, project?.id)
                 router.push("/")
             }
 
         } catch (error) {
-            alert(`Failed to ${type === "create" ? "create" : "edit"} a project. Try again!`);
+            alert(`Failed to ${type === "create" ? "create" : "edit"} a project. Try again!`)
+            console.error("Something bad happened", error)
         } finally {
             setSubmitting(false)
         }
@@ -88,17 +87,19 @@ const ProjectForm = ({ type, session, project }: Props) => {
     return (
         <form
             onSubmit={handleFormSubmit}
-            className="flexStart form">
-            <div className="flexStart form_image-container">
-                <label htmlFor="poster" className="flexCenter form_image-label">
+            className="flexStart flex-col w-full lg:pt-24 pt-12 gap-10 text-lg max-w-5xl mx-auto">
+            <div className="flexStart w-full lg:min-h-[400px] min-h-[200px] relative">
+                <label
+                    htmlFor="poster"
+                    className="flexCenter z-10 text-center w-full h-full p-20 text-gray-100 border-2 border-gray-50 border-dashed"
+                >
                     {!form.image && 'Choose a poster for your project'}
                 </label>
                 <input
                     id="image"
                     type="file"
-                    accept='image/*'
                     required={type === "create" ? true : false}
-                    className="form_image-input"
+                    className="absolute z-30 w-full opacity-0 h-full cursor-pointer"
                     onChange={(e) => handleChangeImage(e)}
                 />
                 {form.image && (
@@ -113,14 +114,14 @@ const ProjectForm = ({ type, session, project }: Props) => {
             <FormField
                 title="Title"
                 state={form.title}
-                placeholder="Design Flow"
+                placeholder="DesignFlow"
                 setState={(value) => handleStateChange('title', value)}
             />
 
             <FormField
                 title='Description'
                 state={form.description}
-                placeholder="Showcase and discover remarkable developer projects."
+                placeholder="Designflow is made using..."
                 isTextArea
                 setState={(value) => handleStateChange('description', value)}
             />
@@ -129,7 +130,7 @@ const ProjectForm = ({ type, session, project }: Props) => {
                 type="url"
                 title="Website URL"
                 state={form.liveSiteUrl}
-                placeholder="https://jsmastery.pro"
+                placeholder="https://designflow.vercel.app"
                 setState={(value) => handleStateChange('liveSiteUrl', value)}
             />
 
@@ -137,8 +138,24 @@ const ProjectForm = ({ type, session, project }: Props) => {
                 type="url"
                 title="GitHub URL"
                 state={form.githubUrl}
-                placeholder="https://github.com/adrianhajdin"
+                placeholder="https://github.com/notishi28"
                 setState={(value) => handleStateChange('githubUrl', value)}
+            />
+
+            <FormField
+                type="url"
+                title="Behance URL"
+                state={form.behanceUrl}
+                placeholder="https://behance.com/notishi28"
+                setState={(value) => handleStateChange('behanceUrl', value)}
+            />
+
+            <FormField
+                type="url"
+                title="Dribbble URL"
+                state={form.dribbbleUrl}
+                placeholder="https://dribbble.com/notishi28"
+                setState={(value) => handleStateChange('dribbbleUrl', value)}
             />
 
             <CustomMenu
@@ -149,7 +166,7 @@ const ProjectForm = ({ type, session, project }: Props) => {
             />
 
             <div className="flexStart w-full">
-                <Button
+                <CustomButton
                     title={submitting ? `${type === "create" ? "Creating" : "Editing"}` : `${type === "create" ? "Create" : "Edit"}`}
                     type="submit"
                     leftIcon={submitting ? "" : "/plus.svg"}

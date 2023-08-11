@@ -5,14 +5,14 @@ import { NavLinks } from "@/constant";
 import { getCurrentUser } from "@/lib/session";
 
 import AuthProviders from "./AuthProviders";
-import Button from "./Button";
+import CustomButton from "./Button";
 import ProfileMenu from "./ProfileMenu";
 
 const Navbar = async () => {
   const session = await getCurrentUser()
 
   return (
-    <nav className='flexBetween navbar'>
+    <nav className='flexBetween py-5 px-8 border-b-[1px] border-nav-border gap-4'>
       <div className='flex-1 flexStart gap-10'>
         <Link href='/'>
           <Image
@@ -37,7 +37,7 @@ const Navbar = async () => {
             <ProfileMenu session={session} />
 
             <Link href="/create-project">
-              <Button title='Share work' />
+              <CustomButton title='Share work' />
             </Link>
           </>
         ) : (

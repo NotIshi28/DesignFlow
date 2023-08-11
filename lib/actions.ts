@@ -7,6 +7,8 @@ type UserProps = {
     name: string
     description: string
     githubUrl: string
+    behanceUrl: string
+    dribbbleUrl: string
     linkedinUrl: string
 }
 
