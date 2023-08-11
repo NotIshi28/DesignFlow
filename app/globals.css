@@ -66,7 +66,7 @@ body {
   @apply grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 mt-10 w-full;
 }
 
-/* Project Actions*/ 
+/* Project Actions */
 .edit-action_btn {
   @apply p-3 text-gray-100 bg-light-white-400 rounded-lg text-sm font-medium;
 }
@@ -133,7 +133,7 @@ body {
   @apply py-5 px-8 border-b border-nav-border gap-4;
 }
 
-/* Profile Menu*/ 
+/* Profile Menu */
 .profile_menu-items {
   @apply flex-col absolute right-1/2 translate-x-1/2 mt-3 p-7 sm:min-w-[300px] min-w-max rounded-xl bg-white border border-nav-border shadow-menu;
 }

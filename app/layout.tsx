@@ -1,30 +1,22 @@
-import NavBar from '@/components/NavBar'
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import Footer from '@/components/Footer'
+import "./globals.css";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
-const inter = Inter({ subsets: ['latin'] })
+export const metadata = {
+  title: "Design Flow",
+  description: "Showcase and discover remarkable developer projects",
+};
 
-export const metadata: Metadata = {
-  title: 'DesignFlow',
-  description: 'Uniting Developers and Designers',
-}
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <NavBar />
+    <html lang='en'>
+      <body>
+        <Navbar />
         <main>
           {children}
         </main>
         <Footer />
       </body>
     </html>
-  )
+  );
 }

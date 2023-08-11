@@ -47,8 +47,6 @@ export const createUserMutation = `
 				avatarUrl
 				description
 				githubUrl
-        behanceUrl
-        dribbbleUrl
 				linkedinUrl
 				id
 			}
@@ -111,9 +109,6 @@ export const getUserQuery = `
     user(by: { email: $email }) {
       id
       name
-      behanceUrl
-      dribbleUrl
-      xUrl
       email
       avatarUrl
       description

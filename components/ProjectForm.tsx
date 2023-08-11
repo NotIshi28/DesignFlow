@@ -27,9 +27,7 @@ const ProjectForm = ({ type, session, project }: Props) => {
         image: project?.image || "",
         liveSiteUrl: project?.liveSiteUrl || "",
         githubUrl: project?.githubUrl || "",
-        behanceUrl: project?.behanceUrl || "",
-        dribbbleUrl: project?.dribbbleUrl || "",
-        category: project?.category || "",
+        category: project?.category || ""
     })
 
     const handleStateChange = (fieldName: keyof FormState, value: string) => {
@@ -115,7 +113,7 @@ const ProjectForm = ({ type, session, project }: Props) => {
             <FormField
                 title="Title"
                 state={form.title}
-                placeholder="Flexibble"
+                placeholder="Design Flow"
                 setState={(value) => handleStateChange('title', value)}
             />
 
@@ -131,7 +129,7 @@ const ProjectForm = ({ type, session, project }: Props) => {
                 type="url"
                 title="Website URL"
                 state={form.liveSiteUrl}
-                placeholder="https://google.com"
+                placeholder="https://jsmastery.pro"
                 setState={(value) => handleStateChange('liveSiteUrl', value)}
             />
 
@@ -139,18 +137,9 @@ const ProjectForm = ({ type, session, project }: Props) => {
                 type="url"
                 title="GitHub URL"
                 state={form.githubUrl}
-                placeholder="https://github.com/user"
+                placeholder="https://github.com/adrianhajdin"
                 setState={(value) => handleStateChange('githubUrl', value)}
             />
-
-            <FormField
-                type="url"
-                title="Behance URL"
-                state={form.behanceUrl}
-                placeholder="https://behance.com/user"
-                setState={(value) => handleStateChange('behanceUrl', value)}
-            />
-
 
             <CustomMenu
                 title="Category"
