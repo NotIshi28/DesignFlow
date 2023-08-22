@@ -17,7 +17,6 @@ type UserFormProps = {
     dribbbleUrl: string
 	linkedinUrl: string
 }
-
 export const createProjectMutation = (form: ProjectFormProps, creatorId: string) => {
 	return `mutation {
         projectCreate(input: { title: "${form.title}", description: "${form.description}", image: "${form.image}", liveSiteUrl: "${form.liveSiteUrl}", githubUrl: "${form.githubUrl}", behanceUrl: "${form.behanceUrl}", dribbbleUrl: "${form.dribbbleUrl}", category: "${form.category}", createdBy: { link: "${creatorId}" } 

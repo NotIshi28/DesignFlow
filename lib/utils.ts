@@ -17,7 +17,7 @@ export function isBase64DataURL(value: string) {
 
 export async function getApiConfig() {
     const isProduction = process.env.NODE_ENV === 'production';
-    const apiUrl = isProduction ? process.env.GRAFBASE_API_URL || '' : 'http://127.0.0.1:3000/graphql';
+    const apiUrl = isProduction ? process.env.GRAFBASE_API_URL || '' : 'http://127.0.0.1:4000/graphql';
     const apiKey = isProduction ? process.env.GRAFBASE_API_KEY || '' : 'letmein';
 
     console.log('Connected to API: ', apiUrl);

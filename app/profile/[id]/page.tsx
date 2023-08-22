@@ -12,7 +12,7 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
     const session = await getCurrentUser()
 
     if (!id) return (
-        <p className="w-full text-center my-10 px-2">Oops, couldn&apos;t find project related to that id</p>
+        <p className="w-full text-center my-10 px-2">Oops, couldn't find a project related to that id</p>
     )
 
     const result = await getProjectDetails(id)

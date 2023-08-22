@@ -46,7 +46,7 @@ const ProfilePage = ({ user, searchParams }: Props) => {
                         {user?.name}
                     </p>
                     <p className="md:text-[47px] text-[30px] md:leading-[61px] leading-[32px] font-extrabold md:mt-[40px] mt-5 lg:max-w-[444px]">
-                        I’m Software Engineer at JSM 👋
+                        Hey I am {user?.name} 👋
                     </p>
                     <div className="flex mt-[30px] gap-5">
                         <ProfileButtons user={user} />

@@ -71,7 +71,7 @@ const ProfileMenu = ({ session }: Props) => {
                         <div className="flex flex-col gap-3 pt-10 items-start w-full">
                             <Menu.Item>
                                 <Link
-                                    href="/profile"
+                                    href="/profile/ProfilePage"
                                     className="text-sm"
                                 >
                                     Work Preferences
@@ -79,7 +79,7 @@ const ProfileMenu = ({ session }: Props) => {
                             </Menu.Item>
                             <Menu.Item>
                                 <Link
-                                    href="/profile"
+                                    href="/profile/ProfilePage"
                                     className="text-sm"
                                 >
                                     Settings
@@ -87,7 +87,7 @@ const ProfileMenu = ({ session }: Props) => {
                             </Menu.Item>
                             <Menu.Item>
                                 <Link
-                                    href="/profile"
+                                    href="/profile/ProfilePage"
                                     className="text-sm"
                                 >
                                     Profile

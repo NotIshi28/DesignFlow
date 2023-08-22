@@ -42,7 +42,8 @@ export const createNewProject = async (form: FormState, creatorId: string) => {
             return result
         }
 
-    } catch (err) {
+    } 
+    catch (err) {
         console.log("Error: ", err)
     }
 };
